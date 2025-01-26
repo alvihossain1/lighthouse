@@ -7,8 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js",
     "postinstall": "prisma generate",
-    "build": "prisma generate",
-    "vercel-build": "prisma generate && prisma migrate deploy"
+    "build": "prisma generate"
   },
   "author": "",
   "license": "ISC",
@@ -30,8 +29,6 @@
   "devDependencies": {
     "@types/node": "^22.9.3",
     "nodemon": "^3.0.1",
-    "prisma": "^6.1.0",
-    "tsx": "^4.19.2",
-    "typescript": "^5.7.2"
+    "prisma": "^6.1.0"
   }
 }
