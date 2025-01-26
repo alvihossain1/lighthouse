@@ -1,4 +1,3 @@
-const Users = require("../models/Users")
 const { generate_token } = require('../lib/auth');
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient()

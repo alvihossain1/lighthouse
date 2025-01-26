@@ -1,10 +1,8 @@
-const { sendMail } = require("../lib/emailer");
+// const { sendMail } = require("../lib/emailer");
 const { paySSLCommerz } = require("../lib/payment/sslcommerz");
 const { payStripe } = require("../lib/payment/stripe");
-const Orders = require("../models/Order")
-const { getProductByIdSystem, updateProductQuantitySystem } = require("./productController");
+const {  updateProductQuantitySystem } = require("./productController");
 const { addProductsOnOrders } = require("./productsOnOrdersController");
-const { getUserByIdSystem } = require("./userController")
 
 
 const { PrismaClient } = require('@prisma/client');

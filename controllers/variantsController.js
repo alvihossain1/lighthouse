@@ -1,4 +1,3 @@
-// const Category = require("../models/Category")
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient()
 
