@@ -1,0 +1,12 @@
+{
+  "files": {
+    "main.css": "/static/css/main.b0f2079f.css",
+    "main.js": "/static/js/main.40c3f046.js",
+    "static/media/Outfit-VariableFont_wght.ttf": "/static/media/Outfit-VariableFont_wght.00c2ed1a3bf798b0da27.ttf",
+    "index.html": "/index.html"
+  },
+  "entrypoints": [
+    "static/css/main.b0f2079f.css",
+    "static/js/main.40c3f046.js"
+  ]
+}
