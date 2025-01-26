@@ -1,5 +1,5 @@
 const fs = require('fs');
-const { PrismaClient } = require('@prisma/client');
+const { PrismaClient } = require('../prisma/generated/client');
 const prisma = new PrismaClient()
 const { addProductImages } = require("./productImagesController");
 const { addProductMoreDetails } = require("./productMoreDetailsController");

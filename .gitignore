@@ -3,3 +3,4 @@
 note.txt
 prismaMain.js
 models
+**/prisma/generated
