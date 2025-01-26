@@ -15,7 +15,7 @@ app.use(cors());
 
 
 //ADDED FOR SEVER RENDERING
-if (process.env.ENV_MODE === "production") {
+if (process.env.NODE_ENV === "production") {
     app.use(express.static(path.join(__dirname, 'build')));
 }
 
@@ -35,7 +35,7 @@ console.log(Date.now())
 
 
 //ADDED FOR SEVER RENDERING
-if (process.env.ENV_MODE === "production") {
+if (process.env.NODE_ENV === "production") {
     app.get('/*', function (req, res) {
         res.sendFile(path.join(__dirname, 'build', 'index.html'));
     });

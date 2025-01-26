@@ -1,3 +1,4 @@
+const prisma = require("../utils/prisma")
 // const { sendMail } = require("../lib/emailer");
 const { paySSLCommerz } = require("../lib/payment/sslcommerz");
 const { payStripe } = require("../lib/payment/stripe");
@@ -5,9 +6,6 @@ const {  updateProductQuantitySystem } = require("./productController");
 const { addProductsOnOrders } = require("./productsOnOrdersController");
 
 
-const { PrismaClient } = require('../prisma/generated/client');
-// const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient()
 
 exports.getOrders = async (req, res) => {
     const userId = req.body.userId || null

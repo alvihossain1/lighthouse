@@ -1,6 +1,4 @@
-const { PrismaClient } = require('../prisma/generated/client');
-// const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient()
+const prisma = require("../utils/prisma")
 const fs = require('fs');
 
 exports.addProductImages = async (req, res) => {

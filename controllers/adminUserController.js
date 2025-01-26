@@ -1,7 +1,4 @@
-// const Admin = require('../models/Admin');
-const { PrismaClient } = require('../prisma/generated/client');
-// const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient()
+const prisma = require("../utils/prisma")
 const { generate_token } = require('../lib/auth');
 
 exports.getAdminUser = async (req, res) => {

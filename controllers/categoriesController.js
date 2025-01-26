@@ -1,7 +1,4 @@
-// const Category = require("../models/Category")
-const { PrismaClient } = require('../prisma/generated/client');
-// const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient()
+const prisma = require("../utils/prisma")
 
 exports.addCategory = async (req, res) => {
     const { name } = req.body

@@ -1,8 +1,4 @@
-const { PrismaClient } = require('../prisma/generated/client');
-// const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient()
-
-
+const prisma = require("../utils/prisma")
 
 exports.getProductVariantsById = async (req, res) => {
     const productId = req.params.id || "xxy"

@@ -1,7 +1,5 @@
 const { generate_token } = require('../lib/auth');
-const { PrismaClient } = require('../prisma/generated/client');
-// const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient()
+const prisma = require("../utils/prisma")
 
 exports.addUser = async (req, res) => {
     let data = JSON.parse(req.body.user);

@@ -1,7 +1,4 @@
-const { PrismaClient } = require('../prisma/generated/client');
-// const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient()
-
+const prisma = require("../utils/prisma")
 
 exports.addProductsOnOrders = async (products, orderId) => {
     products = products.map((product, index) => {
