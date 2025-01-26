@@ -5,9 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js",
-    "postinstall": "prisma generate",
-    "vercel-build": "prisma generate && prisma migrate deploy"
+    "start": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
@@ -27,8 +25,6 @@
     "uuid": "^11.0.3"
   },
   "devDependencies": {
-    "@types/node": "^22.9.3",
-    "nodemon": "^3.0.1",
-    "prisma": "^6.1.0"
+    "nodemon": "^3.0.1"
   }
 }
