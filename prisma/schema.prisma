@@ -1,0 +1,151 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  // binaryTargets = ["native", "debian-openssl-1.1.x"]
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./lighthouse.sqlite"
+}
+
+model Admin {
+  adminId   String   @id
+  fname     String
+  lname     String
+  email     String   @unique
+  password  String
+  image     String?
+  createdAt DateTime @default(now())
+}
+
+model Users {
+  userId    String    @id
+  fname     String
+  lname     String
+  phone     String
+  address   String
+  city      String
+  email     String    @unique
+  password  String
+  image     String?
+  createdAt DateTime  @default(now())
+  orders    Orders[]
+  comments  Comment[]
+}
+
+model Category {
+  categoryId String     @id
+  name       String
+  products   Products[]
+}
+
+model Variants {
+  variantId   String @id
+  variantName String
+}
+
+model Products {
+  productId        String               @id
+  name             String
+  brand            String
+  categoryId       String
+  category         Category             @relation(fields: [categoryId], references: [categoryId], onDelete: Restrict, onUpdate: Cascade)
+  price            Float
+  variantType      String               @default("Variant")
+  description      String?
+  longDescription  String?
+  discount         Float
+  code             String
+  createdAt        DateTime             @default(now())
+  images           ProductImages[]
+  moreDetails      ProductMoreDetails[]
+  productsOnOrders ProductsOnOrders[]
+  comments         Comment[]
+  variants         ProductVariant[]
+}
+
+model ProductVariant {
+  variantId   String   @id
+  variantName String
+  stock       Int
+  price       Float
+  productId   String
+  products    Products @relation(fields: [productId], references: [productId], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model ProductImages {
+  imageId   String    @id
+  url       String
+  productId String?
+  products  Products? @relation(fields: [productId], references: [productId], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model Orders {
+  orderId          String             @id
+  date             DateTime           @default(now())
+  totalPrice       Float              @default(0)
+  deliveryFee      Float              @default(0)
+  paymentMethod    String?
+  deliveryAddress  String?
+  additionalFee    Float?
+  discountFee      Float?
+  status           String?
+  productsOnOrders ProductsOnOrders[]
+  user             Users?             @relation(fields: [userId], references: [userId], onDelete: SetNull, onUpdate: Cascade)
+  userId           String?
+}
+
+model ProductsOnOrders {
+  productsOnOrdersId String   @id
+  quantity           Float
+  itemPrice          Float
+  variantId          String
+  variantName        String
+  orderId            String
+  orders             Orders   @relation(fields: [orderId], references: [orderId], onDelete: NoAction, onUpdate: Cascade)
+  productId          String
+  products           Products @relation(fields: [productId], references: [productId], onDelete: NoAction, onUpdate: Cascade)
+}
+
+model ProductMoreDetails {
+  detailsId String    @id
+  productId String
+  products  Products? @relation(fields: [productId], references: [productId], onDelete: Cascade, onUpdate: Cascade)
+  key       String
+  value     String
+}
+
+model Comment {
+  commentId String   @id
+  body      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  userId    String
+  user      Users    @relation(fields: [userId], references: [userId], onDelete: Cascade, onUpdate: Cascade)
+  productId String
+  products  Products @relation(fields: [productId], references: [productId], onDelete: Cascade, onUpdate: Cascade)
+  replies   Reply[]
+}
+
+model Reply {
+  replyId   String   @id
+  body      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  name      String   @default("LightHousebd")
+  image     String?
+  commentId String?
+  comments  Comment? @relation(fields: [commentId], references: [commentId], onDelete: Cascade, onUpdate: Cascade)
+}
+
+model OrderTransaction {
+  transactionId      String   @id
+  data               String
+  paymentConfirmData String?
+  paymentMethod      String
+  date               DateTime @default(now())
+  paid               Boolean  @default(false)
+}
