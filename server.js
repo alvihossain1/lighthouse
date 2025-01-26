@@ -3,7 +3,6 @@ const app = express();
 const PORT = 3000;
 require('dotenv').config()
 const path = require('path')
-// const mongoose = require("mongoose")
 
 // BODY PARSER
 var bodyParser = require('body-parser');
@@ -24,11 +23,6 @@ if (process.env.ENV_MODE === "production") {
 app.use('/public', express.static(path.join(__dirname, 'public')))
 
 const routes = require("./routes/routes");
-// const { authorization, authorization_success } = require("./lib/auth");
-// const { prismaMain } = require("./prismaMain");
-// const { readRequests } = require("./lib/requests");
-// const { retrieveSessionSSL } = require("./lib/payment/sslcommerz");
-// const { retrieveSession } = require("./lib/payment/stripe");
 
 app.use(routes);
 
@@ -36,13 +30,8 @@ app.get('/', (req, res) => {
     res.send({ status: 200, data: "Server running okay" });
 })
 
-// prismaMain()
-// retrieveSession()
-// retrieveSessionSSL()
 const d = new Date(Date.now())
 console.log(Date.now())
-// console.log(`${d.getDay()+1}-${d.getMonth()+1}-${d.getFullYear()}`)
-// readRequests()
 
 
 //ADDED FOR SEVER RENDERING
