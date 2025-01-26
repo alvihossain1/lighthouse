@@ -6,9 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js",
-    "build": "npx prisma generate",
-    "postinstall": "npx prisma generate"
-
+    "postinstall": "npx prisma generate",
+    "vercel-build": "prisma generate && prisma migrate deploy"
   },
   "author": "",
   "license": "ISC",
