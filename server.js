@@ -41,11 +41,7 @@ if (process.env.NODE_ENV === "production") {
     });
 }
 
-// mongoose.connect("mongodb://localhost/lighthouse").then(() => {
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 })
-// }).catch((error) => {
-//     console.log(`Database connection error ${error}`)
-// })
 

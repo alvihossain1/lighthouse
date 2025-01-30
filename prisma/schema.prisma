@@ -8,7 +8,7 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
@@ -23,21 +23,21 @@ model Admin {
 }
 
 model Users {
-  userId    String    @id
+  userId    String     @id
   fname     String
   lname     String
   phone     String
   address   String
   city      String
-  email     String    @unique
+  email     String     @unique
   password  String
   image     String?
-  createdAt DateTime  @default(now())
+  createdAt DateTime   @default(now())
   orders    Orders[]
-  comments  Comment[]
+  comments  Comments[]
 }
 
-model Category {
+model Categories {
   categoryId String     @id
   name       String
   products   Products[]
@@ -53,22 +53,22 @@ model Products {
   name             String
   brand            String
   categoryId       String
-  category         Category             @relation(fields: [categoryId], references: [categoryId], onDelete: Restrict, onUpdate: Cascade)
+  category         Categories           @relation(fields: [categoryId], references: [categoryId], onDelete: Restrict, onUpdate: Cascade)
   price            Float
   variantType      String               @default("Variant")
-  description      String?
-  longDescription  String?
+  description      String?              @db.LongText
+  longDescription  String?              @db.LongText
   discount         Float
   code             String
   createdAt        DateTime             @default(now())
   images           ProductImages[]
   moreDetails      ProductMoreDetails[]
   productsOnOrders ProductsOnOrders[]
-  comments         Comment[]
-  variants         ProductVariant[]
+  comments         Comments[]
+  variants         ProductVariants[]
 }
 
-model ProductVariant {
+model ProductVariants {
   variantId   String   @id
   variantName String
   stock       Int
@@ -112,40 +112,40 @@ model ProductsOnOrders {
 }
 
 model ProductMoreDetails {
-  detailsId String    @id
-  productId String
-  products  Products? @relation(fields: [productId], references: [productId], onDelete: Cascade, onUpdate: Cascade)
-  key       String
-  value     String
+  detailsId   String    @id
+  productId   String
+  products    Products? @relation(fields: [productId], references: [productId], onDelete: Cascade, onUpdate: Cascade)
+  detailKey   String
+  detailValue String
 }
 
-model Comment {
-  commentId String   @id
+model Comments {
+  commentId String    @id
   body      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @default(now())
   userId    String
-  user      Users    @relation(fields: [userId], references: [userId], onDelete: Cascade, onUpdate: Cascade)
+  user      Users     @relation(fields: [userId], references: [userId], onDelete: Cascade, onUpdate: Cascade)
   productId String
-  products  Products @relation(fields: [productId], references: [productId], onDelete: Cascade, onUpdate: Cascade)
-  replies   Reply[]
+  products  Products  @relation(fields: [productId], references: [productId], onDelete: Cascade, onUpdate: Cascade)
+  replies   Replies[]
 }
 
-model Reply {
-  replyId   String   @id
+model Replies {
+  replyId   String    @id
   body      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
-  name      String   @default("LightHousebd")
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @default(now())
+  name      String    @default("LightHousebd")
   image     String?
   commentId String?
-  comments  Comment? @relation(fields: [commentId], references: [commentId], onDelete: Cascade, onUpdate: Cascade)
+  comments  Comments? @relation(fields: [commentId], references: [commentId], onDelete: Cascade, onUpdate: Cascade)
 }
 
-model OrderTransaction {
+model OrderTransactions {
   transactionId      String   @id
-  data               String
-  paymentConfirmData String?
+  data               String   @db.LongText
+  paymentConfirmData String?  @db.LongText
   paymentMethod      String
   date               DateTime @default(now())
   paid               Boolean  @default(false)

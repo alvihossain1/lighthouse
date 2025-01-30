@@ -3,7 +3,7 @@ const prisma = require("../utils/prisma")
 exports.getProductVariantsById = async (req, res) => {
     const productId = req.params.id || "xxy"
     try {
-        let dbdetails = await prisma.productVariant.findMany({
+        let dbdetails = await prisma.productVariants.findMany({
             where: { productId: productId}
         })
         res.send({ status: 200, data: dbdetails })
@@ -33,7 +33,7 @@ exports.addProductVariants = async (req, res) => {
             return {variantId, productId: req.id, variantName: variant.variantName, ...parsedData}
         })
         try {
-            let dbdetails = await prisma.productVariant.createMany({
+            let dbdetails = await prisma.productVariants.createMany({
                 data: productVariants
             })
             // res.send({ status: 200, data: dbdetails })
@@ -54,7 +54,7 @@ exports.addProductVariantsSingle = async (req, res) => {
     const variantId = "202"+"1"+Date.now();
     try {
         const parsedData = parseDataType({stock, price})
-        let dbdetails = await prisma.productVariant.create({
+        let dbdetails = await prisma.productVariants.create({
             data: {variantId, variantName, ...parsedData, productId}
         })
         res.send({ status: 200, data: dbdetails })
@@ -68,12 +68,39 @@ exports.addProductVariantsSingle = async (req, res) => {
     }
 }
 
+exports.updateProductQuantitySystem = async (products, action) => {
+    try {
+        let update;
+        products.forEach(async (product) => {
+            if (action === 'increment') {
+                update = await prisma.productVariants.update({
+                    where: { productId: product.productId, variantId: product.variantId },
+                    data: { stock: { increment: product.quantity } }
+                })
+            }
+            else if (action === "decrement") {
+                update = await prisma.productVariants.update({
+                    where: { productId: product.productId, variantId: product.variantId },
+                    data: { stock: { decrement: product.quantity } }
+                })
+            }
+        })
+
+    }
+    catch (error) {
+        return { error: "error" }
+    }
+    finally {
+        await prisma.$disconnect()
+    }
+}
+
 exports.updateProductVariant = async (req, res) => {
     const data = req?.body
     const {variantId, variantName, stock, price, productId } = data
     try {
         const parsedData = parseDataType({stock, price})
-        let dbdetails = await prisma.productVariant.update({
+        let dbdetails = await prisma.productVariants.update({
             where: {variantId: variantId, productId: productId},
             data: {variantName, ...parsedData,}
         })
@@ -93,7 +120,7 @@ exports.deleteProductVariant = async (req, res) => {
     console.log(data);
     const { variantId, productId } = data
     try {
-        let dbdetails = await prisma.productVariant.delete({
+        let dbdetails = await prisma.productVariants.delete({
             where: { variantId: variantId, productId: productId},
         })
         res.send({ status: 200, data: dbdetails })
@@ -106,3 +133,5 @@ exports.deleteProductVariant = async (req, res) => {
         await prisma.$disconnect()
     }
 }
+
+

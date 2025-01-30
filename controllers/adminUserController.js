@@ -32,6 +32,7 @@ exports.getAdminUser = async (req, res) => {
         }
     }
     catch (error) {
+        console.log("ERR", error)
         res.send({ status: 500, data: error })
     }
     finally {

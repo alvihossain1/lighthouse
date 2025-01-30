@@ -5,7 +5,7 @@ exports.addCategory = async (req, res) => {
     console.log("CATEGORY", req.body)
     try{
         const categoryId = "981"+Date.now() 
-        const category = await prisma.category.create({
+        const category = await prisma.categories.create({
             data: {name, categoryId}
         })
         if(category){
@@ -24,7 +24,7 @@ exports.addCategory = async (req, res) => {
 
 exports.getCategories = async (req, res) => {
     try{
-        let categories = await prisma.category.findMany({
+        let categories = await prisma.categories.findMany({
             select: {categoryId: true, name: true, products: {select: {productId: true, name: true, images: {select: {url: true, productId: true}, take: 1}}} },
             orderBy: {
                 name: 'asc',
@@ -55,7 +55,7 @@ exports.updateCategory = async (req, res) => {
     const { name, categoryId } = req.body
     try{
         // const category = await Category.findByIdAndUpdate({_id: categoryId }, {name: name})
-        const category = await prisma.category.update({
+        const category = await prisma.categories.update({
             where: {categoryId: categoryId},
             data: {name: name}
         })
@@ -77,7 +77,7 @@ exports.deleteCategory = async (req, res) => {
     const { categoryId } = req.body
     try{
         // const category = await Category.findByIdAndDelete({_id: categoryId })
-        const category = await prisma.category.delete({
+        const category = await prisma.categories.delete({
             where: {categoryId: categoryId}
         })
         if(category){

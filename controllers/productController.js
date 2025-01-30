@@ -20,7 +20,7 @@ exports.getProducts = async (req, res) => {
     try {
         let products = []
         if (name) {
-            const categories = await prisma.category.findMany({
+            const categories = await prisma.categories.findMany({
                 where: { name: name }
             })
             if (categories) {
@@ -240,29 +240,3 @@ exports.deleteProduct = async (req, res) => {
 //     }
 // }
 
-exports.updateProductQuantitySystem = async (products, action) => {
-    try {
-        let update;
-        products.forEach(async (product) => {
-            if (action === 'increment') {
-                update = await prisma.productVariant.update({
-                    where: { productId: product.productId, variantId: product.variantId },
-                    data: { stock: { increment: product.quantity } }
-                })
-            }
-            else if (action === "decrement") {
-                update = await prisma.productVariant.update({
-                    where: { productId: product.productId, variantId: product.variantId },
-                    data: { stock: { decrement: product.quantity } }
-                })
-            }
-        })
-
-    }
-    catch (error) {
-        return { error: "error" }
-    }
-    finally {
-        await prisma.$disconnect()
-    }
-}

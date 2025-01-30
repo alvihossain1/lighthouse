@@ -2,8 +2,8 @@ const prisma = require("../utils/prisma")
 // const { sendMail } = require("../lib/emailer");
 const { paySSLCommerz } = require("../lib/payment/sslcommerz");
 const { payStripe } = require("../lib/payment/stripe");
-const {  updateProductQuantitySystem } = require("./productController");
 const { addProductsOnOrders } = require("./productsOnOrdersController");
+const { updateProductQuantitySystem } = require("./productVariantsController");
 
 
 

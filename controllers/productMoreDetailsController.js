@@ -23,7 +23,7 @@ exports.addProductMoreDetails = async (req, res) => {
     if(moreDetails && moreDetails?.length > 0){
         moreDetails = moreDetails.map((detail, index) => {
             const detailsId = "203"+(index+1)+Date.now();
-            return {detailsId, key: detail.key, value: detail.value, productId: req.id}
+            return {detailsId, detailKey: detail.detailKey, detailValue: detail.detailValue, productId: req.id}
         })
         try {
             let dbdetails = await prisma.productMoreDetails.createMany({
@@ -43,11 +43,11 @@ exports.addProductMoreDetails = async (req, res) => {
 }
 
 exports.addProductMoreDetailsSingle = async (req, res) => {
-    const {key, value, productId} = req?.body
+    const {detailKey, detailValue, productId} = req?.body
     const detailsId = "203"+"1"+Date.now();
     try {
         let dbdetails = await prisma.productMoreDetails.create({
-            data: {detailsId, productId, key, value}
+            data: {detailsId, productId, detailKey, detailValue}
         })
         res.send({ status: 200, data: dbdetails })
     }
@@ -62,11 +62,11 @@ exports.addProductMoreDetailsSingle = async (req, res) => {
 
 exports.updateProductMoreDetails = async (req, res) => {
     const data = req?.body
-    const {detailsId, key, value, productId } = data
+    const {detailsId, detailKey, detailValue, productId } = data
     try {
         let dbdetails = await prisma.productMoreDetails.update({
             where: {detailsId: detailsId, productId: productId},
-            data: {key: key, value: value}
+            data: {detailKey: detailKey, detailValue: detailValue}
         })
         res.send({ status: 200, data: dbdetails })
     }
@@ -85,7 +85,7 @@ exports.deleteProductMoreDetails = async (req, res) => {
     const { detailsId, productId } = data
     try {
         let dbdetails = await prisma.productMoreDetails.delete({
-            where: {detailsId_productId: {detailsId, productId}},
+            where: {detailsId: detailsId, productId: productId},
         })
         res.send({ status: 200, data: dbdetails })
     }

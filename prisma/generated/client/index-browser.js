@@ -111,6 +111,9 @@ Prisma.NullTypes = {
  */
 
 exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
+  ReadUncommitted: 'ReadUncommitted',
+  ReadCommitted: 'ReadCommitted',
+  RepeatableRead: 'RepeatableRead',
   Serializable: 'Serializable'
 });
 
@@ -137,7 +140,7 @@ exports.Prisma.UsersScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
-exports.Prisma.CategoryScalarFieldEnum = {
+exports.Prisma.CategoriesScalarFieldEnum = {
   categoryId: 'categoryId',
   name: 'name'
 };
@@ -161,7 +164,7 @@ exports.Prisma.ProductsScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
-exports.Prisma.ProductVariantScalarFieldEnum = {
+exports.Prisma.ProductVariantsScalarFieldEnum = {
   variantId: 'variantId',
   variantName: 'variantName',
   stock: 'stock',
@@ -201,11 +204,11 @@ exports.Prisma.ProductsOnOrdersScalarFieldEnum = {
 exports.Prisma.ProductMoreDetailsScalarFieldEnum = {
   detailsId: 'detailsId',
   productId: 'productId',
-  key: 'key',
-  value: 'value'
+  detailKey: 'detailKey',
+  detailValue: 'detailValue'
 };
 
-exports.Prisma.CommentScalarFieldEnum = {
+exports.Prisma.CommentsScalarFieldEnum = {
   commentId: 'commentId',
   body: 'body',
   createdAt: 'createdAt',
@@ -214,7 +217,7 @@ exports.Prisma.CommentScalarFieldEnum = {
   productId: 'productId'
 };
 
-exports.Prisma.ReplyScalarFieldEnum = {
+exports.Prisma.RepliesScalarFieldEnum = {
   replyId: 'replyId',
   body: 'body',
   createdAt: 'createdAt',
@@ -224,7 +227,7 @@ exports.Prisma.ReplyScalarFieldEnum = {
   commentId: 'commentId'
 };
 
-exports.Prisma.OrderTransactionScalarFieldEnum = {
+exports.Prisma.OrderTransactionsScalarFieldEnum = {
   transactionId: 'transactionId',
   data: 'data',
   paymentConfirmData: 'paymentConfirmData',
@@ -243,21 +246,120 @@ exports.Prisma.NullsOrder = {
   last: 'last'
 };
 
+exports.Prisma.AdminOrderByRelevanceFieldEnum = {
+  adminId: 'adminId',
+  fname: 'fname',
+  lname: 'lname',
+  email: 'email',
+  password: 'password',
+  image: 'image'
+};
+
+exports.Prisma.UsersOrderByRelevanceFieldEnum = {
+  userId: 'userId',
+  fname: 'fname',
+  lname: 'lname',
+  phone: 'phone',
+  address: 'address',
+  city: 'city',
+  email: 'email',
+  password: 'password',
+  image: 'image'
+};
+
+exports.Prisma.CategoriesOrderByRelevanceFieldEnum = {
+  categoryId: 'categoryId',
+  name: 'name'
+};
+
+exports.Prisma.VariantsOrderByRelevanceFieldEnum = {
+  variantId: 'variantId',
+  variantName: 'variantName'
+};
+
+exports.Prisma.ProductsOrderByRelevanceFieldEnum = {
+  productId: 'productId',
+  name: 'name',
+  brand: 'brand',
+  categoryId: 'categoryId',
+  variantType: 'variantType',
+  description: 'description',
+  longDescription: 'longDescription',
+  code: 'code'
+};
+
+exports.Prisma.ProductVariantsOrderByRelevanceFieldEnum = {
+  variantId: 'variantId',
+  variantName: 'variantName',
+  productId: 'productId'
+};
+
+exports.Prisma.ProductImagesOrderByRelevanceFieldEnum = {
+  imageId: 'imageId',
+  url: 'url',
+  productId: 'productId'
+};
+
+exports.Prisma.OrdersOrderByRelevanceFieldEnum = {
+  orderId: 'orderId',
+  paymentMethod: 'paymentMethod',
+  deliveryAddress: 'deliveryAddress',
+  status: 'status',
+  userId: 'userId'
+};
+
+exports.Prisma.ProductsOnOrdersOrderByRelevanceFieldEnum = {
+  productsOnOrdersId: 'productsOnOrdersId',
+  variantId: 'variantId',
+  variantName: 'variantName',
+  orderId: 'orderId',
+  productId: 'productId'
+};
+
+exports.Prisma.ProductMoreDetailsOrderByRelevanceFieldEnum = {
+  detailsId: 'detailsId',
+  productId: 'productId',
+  detailKey: 'detailKey',
+  detailValue: 'detailValue'
+};
+
+exports.Prisma.CommentsOrderByRelevanceFieldEnum = {
+  commentId: 'commentId',
+  body: 'body',
+  userId: 'userId',
+  productId: 'productId'
+};
+
+exports.Prisma.RepliesOrderByRelevanceFieldEnum = {
+  replyId: 'replyId',
+  body: 'body',
+  name: 'name',
+  image: 'image',
+  commentId: 'commentId'
+};
+
+exports.Prisma.OrderTransactionsOrderByRelevanceFieldEnum = {
+  transactionId: 'transactionId',
+  data: 'data',
+  paymentConfirmData: 'paymentConfirmData',
+  paymentMethod: 'paymentMethod'
+};
+
 
 exports.Prisma.ModelName = {
   Admin: 'Admin',
   Users: 'Users',
-  Category: 'Category',
+  Categories: 'Categories',
   Variants: 'Variants',
   Products: 'Products',
-  ProductVariant: 'ProductVariant',
+  ProductVariants: 'ProductVariants',
   ProductImages: 'ProductImages',
   Orders: 'Orders',
   ProductsOnOrders: 'ProductsOnOrders',
   ProductMoreDetails: 'ProductMoreDetails',
-  Comment: 'Comment',
-  Reply: 'Reply',
-  OrderTransaction: 'OrderTransaction'
+  Comments: 'Comments',
+  Replies: 'Replies',
+  OrderTransactions: 'OrderTransactions'
 };
 
 /**
